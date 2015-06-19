@@ -1,2 +1,2 @@
-# NextFriend
-TODO
+# Backend
+General written in python.
