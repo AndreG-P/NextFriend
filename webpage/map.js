@@ -21,7 +21,7 @@ function positionError(){
 }
 
 function foundUserLocation(location){		
-	alert("location: "+ location.coords);
+	alert("location: "+ location.coords.lng);	// is undefinde
 }
 
 
@@ -70,5 +70,5 @@ function init(){
 	//moveMapToBerlin(map);
 	determineLocation();
 	moveMapToPoint(map, 52.53, 13.39, 14 ); // todo geting user location
-
+	addMarkersToMap(map, 52.53, 13.39);
 }

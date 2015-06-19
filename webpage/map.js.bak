@@ -21,7 +21,7 @@ function positionError(){
 }
 
 function foundUserLocation(location){		
-	alert("location: "+ location.coords);
+	alert("location: "+ location.coords.lng);
 }
 
 
@@ -35,23 +35,15 @@ function determineLocation(){
 	}
 }
 
-
-
-
 function addMarkersToMap(map, lat, lng) {
 	  var newMarker = new H.map.Marker({lat:+lat, lng:+lng});
 	  map.addObject(newMarker);  
-  }
-
-	
 }
-
-
 
 /**
  * Boilerplate map initialization code starts below:
  */
-function map_init(){
+function init(){
 	//Step 1: initialize communication with the platform
 	var platform = new H.service.Platform({
 	  app_id: 'eAj5kHCKYcWnfIcHfPJf',
@@ -78,5 +70,5 @@ function map_init(){
 	//moveMapToBerlin(map);
 	determineLocation();
 	moveMapToPoint(map, 52.53, 13.39, 14 ); // todo geting user location
-
+	addMarkersToMap(map, 52.53, 13.39);
 }
