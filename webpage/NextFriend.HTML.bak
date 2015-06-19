@@ -8,12 +8,23 @@
 	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-	<script type="text/javascript" charset="UTF-8"src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-	<script  type="text/javascript" charset="UTF-8" src="map.js" ></script>
+	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="map.js" /></script>
+	<script type="text/javascript" charset="UTF-8" src="map.js" /></script>
 </head>
-<body onload="map_init();"> 
-  <div id="map" style="width: 100%; height: 100%; background: grey" />
-  
-  
+<body onload="init();">
+	<div id="map" style="width: 100%; height: 100%; background: grey" />
+	<!--script type="text/javascript" charset="UTF-8" src="map.js"></script-->
+	<!--script type="text/javascript" charset="UTF-8" src="map.js" /-->
+	
+	<!--script type="text/javascript" charset="UTF-8">
+		function addMarkersToMap(map) {
+			// Trifftstrasse
+			var friendOneMarker = new H.map.Marker({lat:52.589293, lng:13.3182133});
+			map.addObject(friendOneMarker);
+		}
+		
+		addMarkersToMap(map);
+	</script-->
 </body>
 </html>

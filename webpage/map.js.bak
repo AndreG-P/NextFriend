@@ -1,4 +1,7 @@
   
+  var map = 0;
+  var platform = 0;
+  var userlocation = 0;
 /**
  * Moves the map to display over Berlin
  *
@@ -21,7 +24,9 @@ function positionError(){
 }
 
 function foundUserLocation(location){		
-	alert("location: "+ location.coords.lng);
+//	alert("location: "+ location.coords.latitude);	// is undefinde
+	moveMapToPoint(map, location.coords.latitude, location.coords.longitude, 14 ); // todo geting user location
+	userlocation = location.coords;
 }
 
 
@@ -45,7 +50,7 @@ function addMarkersToMap(map, lat, lng) {
  */
 function init(){
 	//Step 1: initialize communication with the platform
-	var platform = new H.service.Platform({
+	platform = new H.service.Platform({
 	  app_id: 'eAj5kHCKYcWnfIcHfPJf',
 	  app_code: 'belhuu93pAdVRzaRV_nI0A',
 	  useCIT: true,
@@ -54,7 +59,7 @@ function init(){
 	var defaultLayers = platform.createDefaultLayers();
 
 	//Step 2: initialize a map  - not specificing a location will give a whole world view.
-	var map = new H.Map(document.getElementById('map'),
+	 map = new H.Map(document.getElementById('map'),
 	  defaultLayers.normal.map);
 
 	//Step 3: make the map interactive
@@ -67,8 +72,8 @@ function init(){
 
 
 	// Now use the map as required...
-	//moveMapToBerlin(map);
+//	var testPoint[] = new Array(52.55, 13.5);
 	determineLocation();
-	moveMapToPoint(map, 52.53, 13.39, 14 ); // todo geting user location
-	addMarkersToMap(map, 52.53, 13.39);
+//	addMarkersToMap(map, testPoint[0], testPoint[1] );
+//	calculateRouteFromAtoB (platform, userlocation, testPoint[0], testPoint[1]);
 }
