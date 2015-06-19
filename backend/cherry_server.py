@@ -45,19 +45,19 @@ class GPSSocketHandler(WebSocket):
         # first user gets admin
         if not admin_name: 
             admin_name = name       
-            print admin_name,'is now admin!'
+            #print admin_name,'is now admin!'
         else:
             # if admin sends message again, end round
             if name==admin_name:
                 # get response from ansgar
                 response_message = 'Trinkhalle des heiligen Juhnkes#52.3/45.2'
-                print admin_name,'ended round'
+                #print admin_name,'ended round'
                 admin_name = ""
                 clients_coords.clear()
                 cherrypy.engine.publish('websocket-broadcast', response_message)
             else:   
                 clients_coords[name]=lat+','+long
-                print 'updated client',name,'@pos',lat,',',long
+                #print 'updated client',name,'@pos',lat,',',long
                        
 class Root(object):
     @cherrypy.expose
@@ -73,7 +73,7 @@ class Root(object):
     @cherrypy.expose
     def received_message(self, m):
         recvStr = m.data.decode("utf-8")
-        print 'client sent:',recvStr
+        #print 'client sent:',recvStr
 
 cherrypy.quickstart(Root(), '/', config={'/ws': {'tools.websocket.on': True,
                                                  'tools.websocket.handler_cls': GPSSocketHandler}})
