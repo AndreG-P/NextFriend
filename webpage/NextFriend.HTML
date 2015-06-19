@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="map.js" /></script>
+	<script type="text/javascript" charset="UTF-8">
+		//function addMarkersToMap(map) {
+			// Trifftstrasse
+		//	var friendOneMarker = new H.map.Marker({lat:52.589293, lng:13.3182133});
+		//	map.addObject(friendOneMarker);
+		//}
+		function test-again(){
+			var map = new H.Map(document.getElementById('map'),defaultLayers.normal.map);
+			
+			//Step 3: make the map interactive
+			// MapEvents enables the event system
+			// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+			var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+			// Create the default UI components
+			var ui = H.ui.UI.createDefault(map, defaultLayers);
+			alert("HÄÄÄ");
+			
+			addMarkersToMap(map, 52.589293, 13.3182133);
+		}
+	</script>
+</head>
+<body onload="init();">
+	<div id="map" style="width: 100%; height: 100%; background: grey" />
+	<div id="small" onload="alert("MAN EY");"/>
+	
+	<!--script type="text/javascript" charset="UTF-8" src="map.js"></script-->
+	<!--script type="text/javascript" charset="UTF-8" src="map.js" /-->
+</body>
+</html>
