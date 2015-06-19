@@ -15,6 +15,7 @@ function moveMapToPoint(map, lat, lng, zoom ){
   map.setZoom(zoom);
 }
 
+/*
 function determineLocation(){
 	if(navigator.geolocation){
 	//	navigator.geolocation.getCurrentPosition(foundUserLocation, positionError);
@@ -29,6 +30,8 @@ function foundUserLocation(location){
 
 	
 }
+*/
+
 /**
  * Boilerplate map initialization code starts below:
  */
@@ -56,5 +59,5 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Now use the map as required...
 //moveMapToBerlin(map);
-determineLocation();
+//determineLocation();
 moveMapToPoint(map, 52.53, 13.39, 14 );
