@@ -3,6 +3,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import unicodedata
 import os
+from os import rename
 
 
 class placeFinder():
@@ -18,13 +19,9 @@ class placeFinder():
             bar_c.close()
             bar_file.close()
         else:
-            pass
-            #read_bar_list(readBarFile)
+            self.read_bar_list(readBarFile)
 
-        #coll = zip(bars, b)
-        #dest_list = ["&destination"+str(i)+"="+x for i, x in enumerate(b) ]
-        #print(dest_list)
-        #print({ b: x for a, b in list(coll) for x in a })
+
 
 
     def find_closest(self, friends):
@@ -55,11 +52,13 @@ class placeFinder():
 
 
         print(shortest, self.b[shortest[1]], self.bars[shortest[1]])
-        return (self.b[shortest[1]], self.bars[shortest[1]])
+        return (self.b[shortest[1]], self.bars[shortest[1][0]])
 
 
     def read_bar_list(self, file):
 
+        bar_file = open(file,"r")
+        bars = [(line.split(";")[0].strip(), line.split(";")[1].strip().replace(",", "").replace(" ", "+")) for line in bar_file.readlines()]
 
         bar_coord = []
         for i in range(len(bars)):
@@ -67,10 +66,8 @@ class placeFinder():
             geocodeUrl = "http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=HaEP7b8nG5SDZGZvbDyY&app_code=JOYjBF5ccoacXdOIyhwYkA&gen=8&searchtext={}".format(search)
 
             print(geocodeUrl)
-            #print(geocodeUrl)
 
             root = ET.fromstring(urllib.request.urlopen(geocodeUrl).read())
-
 
             for key in root.iter():
                 if key.tag == "NavigationPosition":
@@ -78,15 +75,22 @@ class placeFinder():
                     bar_coord.append((child.text for child in list(key)))
                     break
 
-        bar_file = open("/home/ansgar/Schreibtisch/bars_coord", "w")
-        bar_file.writelines("\n".join((", ".join(x) for x in bar_coord)))
+        bar_coord_file = open("data/bars_coord", "w")
+        bar_coord_file.writelines("\n".join((", ".join(x) for x in bar_coord)))
+        bar_coord_file.close()
         bar_file.close()
+        rename(file, "data/berlin_bars")
+
+        dest_list = ["&destination"+str(i)+"="+x for i, x in enumerate(bar_coord)]
+        print(dest_list)
+        dest_file = open("data/")
+        #print({ b: x for a, b in list(coll) for x in a })
 
 
 
-friends = {"a": "52.4,13.4", "b": "52.5,13.5", "c": "52.4,13.4"}
-p = placeFinder()
-p.find_closest(friends)
+#friends = {"a": "52.4,13.4", "b": "52.5,13.5", "c": "52.4,13.4"}
+#p = placeFinder()
+#p.find_closest(friends)
 
 
 
