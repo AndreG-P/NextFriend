@@ -35,23 +35,15 @@ function determineLocation(){
 	}
 }
 
-
-
-
 function addMarkersToMap(map, lat, lng) {
 	  var newMarker = new H.map.Marker({lat:+lat, lng:+lng});
 	  map.addObject(newMarker);  
-  }
-
-	
-
-
-
+}
 
 /**
  * Boilerplate map initialization code starts below:
  */
-function map_init(){
+function init(){
 	//Step 1: initialize communication with the platform
 	var platform = new H.service.Platform({
 	  app_id: 'eAj5kHCKYcWnfIcHfPJf',
