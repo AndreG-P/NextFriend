@@ -11,9 +11,9 @@
 	<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="map.js" /></script>
 	<script type="text/javascript" charset="UTF-8" src="routeplanner.js" /></script>
-
+	<script type="text/javascript" charset="UTF-8" src="display_route.js" /></script>
 	<script type="text/javascript" charset="UTF-8">
-		
+		var socket = 0;
 		function addMarkerToGroup(group, coordinate, html) {
 			var marker = new H.map.Marker(coordinate);
 			// add custom data to the marker
@@ -21,6 +21,25 @@
 			group.addObject(marker);
 		}
 		
+
+		function getNameFromMessage(m){
+			var name = m.split('#')[0];
+			return name;
+		}
+
+		function getLatitudeFromMessage(m){
+			var latlong = m.split('#')[1];
+			var lat = latlong.split('/')[0];
+			return lat;
+		}
+
+		function getLongitudeFromMessage(m){
+			var latlong = m.split('#')[1];
+			var lng = latlong.split('/')[1];
+			return lng;
+		}
+
+
 		var bubble;
 
 		/**
@@ -60,11 +79,33 @@
 			//TODO HARDCODED just for me
 			//var sendingInf = name + "#" + userloction.latitude + "/" + userloction.longitude;
 			var sendingInf = name + "#" + 52.53 + "/" + 13.39;
-			//socket.send(sendingInf);
-			alert(sendingInf);
+			socket.send(sendingInf);
+			//alert("send"+sendingInf);
 		}
 		
 		function superInit(){
+			var url = "ws://ec2-52-28-160-147.eu-central-1.compute.amazonaws.com:80/ws";
+			socket = new WebSocket( url );
+			socket.onopen = function(){
+				//alert('openened');
+			};
+			socket.onmessage = function(evt) {
+				m = evt.data;
+				if ( evt.data.substr(0,1) == '!') {
+					// TODO ZIELADDRESSE
+					m= m.replace('!','');
+					var lat_ = getLatitudeFromMessage(m);
+					var long_ = getLongitudeFromMessage(m);
+					get_Pedestrian_Route(lat_,long_);
+
+				}
+				//alert('hier irgendwas');
+				var tmp = evt.data.split("#");
+				var name = tmp[0];
+				var latitude = tmp.split("/")[0];
+				var longitude = tmp.split("/")[1];
+
+			};
 			init();
 			moveMapToPoint(map, 52.53, 13.39, 14);
 			
@@ -81,16 +122,7 @@
 			
 			window.onload = document.getElementById('focusThis').focus();
 			
-			socket.onmessage = function(evt) {
-				if ( evt.data.substr(0,1) ) {
-					// TODO ZIELADDRESSE
-				}
-				
-				var tmp = evt.data.split("#");
-				var name = tmp[0];
-				var latitude = tmp.split("/")[0];
-				var longitude = tmp.split("/")[1];
-			}
+
 		}
 	</script>
 

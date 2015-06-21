@@ -2,6 +2,16 @@
   var map = 0;
   var platform = 0;
   var userlocation = 0;
+
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = 0;
+
+// Create the default UI components
+var ui = 0;
+
+
+
 /**
  * Moves the map to display over Berlin
  *
@@ -24,7 +34,7 @@ function positionError(){
 }
 
 function foundUserLocation(location){		
-//	alert("location: "+ location.coords.latitude);	// is undefinde
+
 	moveMapToPoint(map, location.coords.latitude, location.coords.longitude, 14 ); // todo geting user location
 	userlocation = location.coords;
 }
@@ -65,16 +75,21 @@ function init(){
 	//Step 3: make the map interactive
 	// MapEvents enables the event system
 	// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-	var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+	//var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+	behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 	// Create the default UI components
-	var ui = H.ui.UI.createDefault(map, defaultLayers);
+	 ui = H.ui.UI.createDefault(map, defaultLayers);
+	
+	
 
 
 	// Now use the map as required...
-	var Point_lat = 52.55;
-	var Point_lng = 13.5;
+
 	determineLocation();
-	addMarkersToMap(map, Point_lat, Point_lng);
-	calculateRouteFromAtoB (platform, userlocation, Point_lat, Point_lng);
+	
+	
 }
+
+
